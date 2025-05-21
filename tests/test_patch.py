@@ -2,6 +2,7 @@ import os
 import unittest
 import undetected_geckodriver
 
+
 class TestPatch(unittest.TestCase):
     def test_patch(self):
         """

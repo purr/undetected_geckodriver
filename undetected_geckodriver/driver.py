@@ -2,6 +2,7 @@ import os
 import shutil
 import time
 import getpass
+import logging
 
 import psutil
 from selenium.webdriver.common.driver_finder import DriverFinder
@@ -18,6 +19,8 @@ from .utils import (
     get_platform_dependent_params,
     get_webdriver_instance,
 )
+
+logger = logging.getLogger(__name__)
 
 class Firefox(RemoteWebDriver, WebDriverMixin):
     """
@@ -78,12 +81,16 @@ class Firefox(RemoteWebDriver, WebDriverMixin):
 
         if (self.lookup_path is not None
                 and os.path.exists(self.lookup_path)):
+            logger.debug("Path overridden: using %s", self.lookup_path)
             return self.lookup_path
+        elif (self.lookup_path is not None):
+            logger.error("lookup_path was set, but does not exist. %s is expected to exist", self.lookup_path)
 
 
         firefox_paths: list = self._platform_dependent_params["firefox_paths"]
         for path in firefox_paths:
             if os.path.exists(path):
+                logger.debug("Found FF install in %s", path)
                 return path
 
         # Fixes #4
