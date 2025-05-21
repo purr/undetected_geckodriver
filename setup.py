@@ -6,7 +6,8 @@
     attempts to avoid detection by web services by patching
     certain parts of the Firefox browser.
 
-    Author: Bytexenon (https://github.com/Bytexenon)
+    Original author: Bytexenon (https://github.com/Bytexenon)
+    Fork maintainer: LunarWatcher (https://github.com/LunarWatcher
 """
 
 # Imports #
@@ -26,17 +27,17 @@ LONG_DESC = open(os.path.join(DIRNAME, "README.md")).read()
 
 # Setup #
 setup(
-    name="undetected-geckodriver",
-    version="1.0.7",
+    name="undetected-geckodriver-lw",
+    version="2.0.0",
     packages=["undetected_geckodriver"],
     install_requires=["selenium>=4.10.0", "psutil>=5.8.0"],
     include_package_data=True,
     description=DESCRIPTION,
     long_description=LONG_DESC,
     long_description_content_type="text/markdown",
-    author="ByteXenon",
-    author_email="ddavi142@asu.edu",
-    url="https://github.com/ByteXenon/undetected_geckodriver",
+    author="LunarWatcher",
+    author_email="oliviawolfie@pm.me",
+    url="https://github.com/LunarWatcher/undetected_geckodriver",
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
@@ -54,10 +55,10 @@ setup(
         "Operating System :: POSIX :: Linux",
     ],
     project_urls={
-        "Documentation": "https://github.com/ByteXenon/undetected_geckodriver#readme",
-        "Source": "https://github.com/ByteXenon/undetected_geckodriver",
-        "Tracker": "https://github.com/ByteXenon/undetected_geckodriver/issues",
-        "Changelog": "https://github.com/ByteXenon/undetected_geckodriver/releases",
+        "Documentation": "https://github.com/LunarWatcher/undetected_geckodriver#readme",
+        "Source": "https://github.com/LunarWatcher/undetected_geckodriver",
+        "Tracker": "https://github.com/LunarWatcher/undetected_geckodriver/issues",
+        "Changelog": "https://github.com/LunarWatcher/undetected_geckodriver/releases",
     },
     keywords=(
         "selenium firefox webdriver undetected bypass cloudflare distil "

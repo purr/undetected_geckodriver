@@ -1,57 +1,27 @@
-<div align="center">
+# Undetected GeckoDriver
 
-# Undetected GeckoDriver v1.0.7
+Undetected-geckodriver is a patching tool that removes the `webdriver` property directly from the Geckodriver binary
 
-A Python package that integrates with Firefox Selenium to bypass anti-bot detection mechanisms, ideal for web scraping, automated testing, and browser automation without being marked as a bot.
+This project is forked from [Bytexenon's project by the same name](https://github.com/bytexenon/undetected_geckodriver) after they archived their version, and is primarily maintained so [the archival efforts of the Stack Exchange data dump](https://github.com/LunarWatcher/se-data-dump-transformer) can continue without Cloudflare interfering. 
 
-[![PyPI version](https://badge.fury.io/py/undetected-geckodriver.svg)](https://badge.fury.io/py/undetected-geckodriver)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Downloads](https://pepy.tech/badge/undetected-geckodriver)](https://pepy.tech/project/undetected-geckodriver)
-[![Downloads](https://pepy.tech/badge/undetected-geckodriver/month)](https://pepy.tech/project/undetected-geckodriver)
-[![Downloads](https://pepy.tech/badge/undetected-geckodriver/week)](https://pepy.tech/project/undetected-geckodriver)
-
-</div>
-
-## Preview
-
-|                                           With undetected-geckodriver                                           |                                           Without undetected-geckodriver                                           |
-| :-------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
-| ![With undetected-geckodriver](https://github.com/user-attachments/assets/24a208c0-4793-4d5d-bf3c-22e3a1beb9a4) | ![Without undetected-geckodriver](https://github.com/user-attachments/assets/927be4df-06d6-4d88-8948-668c35efa68e) |
-
-> You can test it for yourself by going to [this website](https://www.browserscan.net/bot-detection)
-
-## Overview
-
-> [!NOTE]
-> Currently, this package only supports Linux. Support for Windows and macOS is planned for future releases.
-
-Undetected GeckoDriver is a powerful Python package designed to work seamlessly with the [Selenium](https://github.com/SeleniumHQ/selenium) browser automation framework. Selenium allows you to control web browsers through code, making it an essential tool for web scraping, automated testing, and browser automation. However, when browsers are controlled by scripts (often referred to as "puppet browsers"), they typically set specific properties that can be detected by anti-bot services like Cloudflare. For instance, properties such as `navigator.webdriver` can be checked using JavaScript, which may restrict access to content on sites protected by such services.
-
-To address this issue, Undetected GeckoDriver acts as an interface between your code and Selenium, helping you bypass bot detection mechanisms. When you create a new WebDriver instance using the `Firefox()` class from the Undetected GeckoDriver package (as opposed to using Selenium directly), the following processes occur:
-
-1. The original Firefox binary is located, copied, and patched to prevent it from modifying properties such as `navigator.webdriver` while using Selenium.
-2. A Selenium WebDriver instance is created that uses the patched Firefox binary.
-
-This makes it possible to interact with websites without being detected as a bot, allowing you to scrape data, automate tasks, and perform other browser-based operations without triggering bot detection mechanisms.
+Undetected geckodriver is not designed to bypass all of Cloudflare on its own; you still need to implement manual captcha stuff on your end if you get hit by a CF captcha wall. This tool exists so those captcha walls, if they're hit, aren't forced infinite bot check wall that redirects back to itself. Some sites, like Stack Exchange, have Cloudflare configured so aggressively that running into it is a guarantee; whether that wall can be bypassed with or without human supervision, however, seems to be down to the `navigator.webdriver` attribute.
 
 ## Installation
+
 
 You can install the package via pip:
 
 ```bash
-pip install undetected-geckodriver
+pip install undetected-geckodriver-lw
 ```
 
 Or you can install it from source:
 
 ```bash
-git clone https://github.com/bytexenon/undetected_geckodriver
+git clone https://github.com/LunarWatcher/undetected_geckodriver
 cd undetected_geckodriver
 pip install .
 ```
-
-> [!NOTE]
-> The last installation method is not recommended unless you are planning to contribute to the project. For regular usage, it is recommended to install the package via regular pip installation.
 
 ## Usage
 
@@ -128,31 +98,8 @@ When Firefox is controlled remotely by a script (such as when using Selenium), i
 
 While undetected-chromedriver is a great tool for bypassing bot detection mechanisms, it only supports Chrome and Edge browsers. Undetected GeckoDriver fills this gap by providing similar functionality for Firefox browsers.
 
-## Roadmap
-
-**Completed:**
-
-- [x] **Spoof `navigator.webdriver` property**: Implement a method to spoof the `navigator.webdriver` property to prevent detection by services like Cloudflare. This helps in avoiding bot detection mechanisms.
-
-**In Progress:**
-
-- [ ] **Multi-platform support**: Extend the compatibility of the tool to work seamlessly across different operating systems other than Linux (Windows, macOS). This includes ensuring all dependencies and configurations are platform-independent.
-
-**Planned:**
-
-- [ ] **Helper functions for passing CAPTCHAs and other security measures**: Develop utility functions to automate the solving of CAPTCHAs and bypass other common security measures encountered during web scraping. (e.g. automatically passing Cloudflare's "I'm human" challenge)
-
-- [ ] **Support for Selenium Wire**: Integrate Selenium Wire to allow for more advanced network interactions, such as modifying requests and responses.
-
-## Contributing
-
-Contributions are welcome! Please feel free to open an issue or submit a pull request if you encounter any problems or have any suggestions, improvements, or new features you would like to see implemented.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
 
-## Acknowledgments
-
-- Special thanks to the contributors of the Selenium project.
-- Inspiration from the [undetected-chromedriver project](https://github.com/ultrafunkamsterdam/undetected-chromedriver).

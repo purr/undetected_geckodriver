@@ -1,4 +1,3 @@
-# Imports #
 import os
 import shutil
 import time
@@ -19,15 +18,15 @@ from .utils import (
     get_webdriver_instance,
 )
 
-
-# Main class #
 class Firefox(RemoteWebDriver, WebDriverMixin):
     """
     A custom Firefox WebDriver that attempts to avoid detection by web services.
     """
 
     def __init__(
-        self, options: Options = None, service: Service = None, keep_alive: bool = True
+        self, options: Options | None = None,
+        service: Service | None = None,
+        keep_alive: bool = True
     ) -> None:
         self.webdriver: WebDriver = get_webdriver_instance()
         self._platform_dependent_params: dict = get_platform_dependent_params()
@@ -43,12 +42,12 @@ class Firefox(RemoteWebDriver, WebDriverMixin):
 
         self._initialize_service()
 
-    def _setup_firefox_environment(self) -> None:
+    def _setup_firefox_environment(self):
         """Set up the undetected Firefox environment."""
         self._create_undetected_firefox_directory()
         self._patch_libxul_file()
 
-    def _initialize_service(self) -> None:
+    def _initialize_service(self):
         """Initialize the Firefox service and remote connection."""
         finder = DriverFinder(self.service, self.options)
         self.service.path = finder.get_driver_path()
