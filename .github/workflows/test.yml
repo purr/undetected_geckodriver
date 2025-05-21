@@ -29,10 +29,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install setuptools wheel
-      - name: Fuck macOS with a cactus
-        if: ${{ matrix.os }} == 'macos-latest'
-        run: |
-          ls /Users/runner/hostedtoolcache/firefox/latest/arm64/Contents/MacOS/
       - name: Run tests
         run: |
           python3 -m unittest

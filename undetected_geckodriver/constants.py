@@ -4,16 +4,16 @@ TO_REPLACE_STRING = b"webdriver"
 PLATFORM_DEPENDENT_PARAMS = {
     # Do not remove, the (actual) support for Windows & macOS is coming soon
     "Windows": {
-       "firefox_execs": ["firefox.exe"],
-       "firefox_paths": ["C:\\Program Files\\Mozilla Firefox"],
-       "undetected_path": "C:\\Users\\{USER}\\AppData\\Local\\undetected_firefox\\",
-       "xul": "xul.dll",
+        "firefox_execs": ["firefox.exe"],
+        "firefox_paths": ["C:\\Program Files\\Mozilla Firefox"],
+        "undetected_path": "C:\\Users\\{USER}\\AppData\\Local\\undetected_firefox\\",
+        "xul": "xul.dll",
     },
     "Darwin": {
-       "firefox_execs": ["Firefox.app"],
-       "firefox_paths": ["/Applications/Firefox.app/Contents/MacOS"],
-       "undetected_path": "/Users/{USER}/Library/Caches/undetected_firefox/",
-       "xul": "libxul.dylib",
+        "firefox_execs": ["Firefox.app"],
+        "firefox_paths": ["/Applications/Firefox.app/Contents/MacOS"],
+        "undetected_path": "/Users/{USER}/Library/Caches/undetected_firefox/",
+        "xul": "XUL",
     },
     "Linux": {
         "firefox_execs": ["firefox", "firefox-bin"],
