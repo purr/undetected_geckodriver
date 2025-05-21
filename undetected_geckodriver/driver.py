@@ -27,8 +27,10 @@ class Firefox(RemoteWebDriver, WebDriverMixin):
     def __init__(
         self, options: Options | None = None,
         service: Service | None = None,
+        lookup_path: str | None = None,
         keep_alive: bool = True
     ) -> None:
+        self.lookup_path = lookup_path
         self.webdriver: WebDriver = get_webdriver_instance()
         self._platform_dependent_params: dict = get_platform_dependent_params()
         self._firefox_path: str = self._get_firefox_installation_path()
@@ -73,6 +75,11 @@ class Firefox(RemoteWebDriver, WebDriverMixin):
         directory containing the Firefox binary and its libraries.
         Normally, it's located in `/usr/lib/firefox`.
         """
+
+        if (self.lookup_path is not None
+                and os.path.exists(self.lookup_path)):
+            return self.lookup_path
+
 
         firefox_paths: list = self._platform_dependent_params["firefox_paths"]
         for path in firefox_paths:

@@ -22,7 +22,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
-      - uses: browser-actions/setup-firefox@v1
+      - name: Set up Firefox
+        uses: browser-actions/setup-firefox@v1
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -31,6 +32,8 @@ jobs:
       - name: Run tests
         run: |
           python3 -m unittest
+        env:
+          ACTIONS_FF_OVERRIDE: ${{ steps.set-up-firefox.outputs.firefox-path }}
       - name: Geckodriver logs
         if: failure()
         run:
