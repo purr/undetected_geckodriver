@@ -33,7 +33,7 @@ jobs:
         run: |
           python3 -m unittest
         env:
-          ACTIONS_FF_OVERRIDE: ${{ steps.setup-firefox.outputs.firefox-path }}
+          ACTIONS_FF_OVERRIDE: ${{ steps.setup-firefox.outputs.firefox-path }}/..
       - name: Geckodriver logs
         if: failure()
         run:
