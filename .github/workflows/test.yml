@@ -29,3 +29,8 @@ jobs:
       - name: Run tests
         run: |
           python3 -m unittest
+      - name: Geckodriver logs
+        if: failure()
+        run:
+          cat geckodriver.log || 1
+        shell: bash
