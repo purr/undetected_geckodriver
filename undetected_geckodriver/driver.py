@@ -33,6 +33,9 @@ class Firefox(RemoteWebDriver, WebDriverMixin):
         lookup_path: str | None = None,
         keep_alive: bool = True
     ) -> None:
+        if (lookup_path is not None and not os.path.isdir(lookup_path)):
+            raise RuntimeError("You passed an override path, but it is not a directory")
+
         self.lookup_path = lookup_path
         self.webdriver: WebDriver = get_webdriver_instance()
         self._platform_dependent_params: dict = get_platform_dependent_params()

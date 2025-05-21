@@ -11,6 +11,9 @@ class TestPatch(unittest.TestCase):
         where the patch just generally fails for whatever reason.
         """
         overridden_path = os.environ.get("ACTIONS_FF_OVERRIDE")
+        if (overridden_path is not None):
+            overridden_path = os.path.abspath(overridden_path)
+
         driver = undetected_geckodriver.Firefox(
             lookup_path=overridden_path
         )
