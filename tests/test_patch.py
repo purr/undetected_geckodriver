@@ -18,5 +18,7 @@ class TestPatch(unittest.TestCase):
             b"webdriver" in libxul_data
         )
 
+        driver.close()
+
 if __name__ == '__main__':
     unittest.main()

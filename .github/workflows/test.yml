@@ -28,4 +28,4 @@ jobs:
           pip install setuptools wheel
       - name: Run tests
         run: |
-          python3 -m unittest tests
+          python3 -m unittest
