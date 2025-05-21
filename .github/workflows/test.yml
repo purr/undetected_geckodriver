@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v4
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -32,5 +34,5 @@ jobs:
       - name: Geckodriver logs
         if: failure()
         run:
-          cat geckodriver.log || 1
+          cat geckodriver.log || true
         shell: bash
