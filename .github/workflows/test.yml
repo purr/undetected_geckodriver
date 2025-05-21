@@ -25,6 +25,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install setuptools wheel
+
+          sudo apt install -y firefox
       - name: Run tests
         run: |
           python3 -m unittest tests
