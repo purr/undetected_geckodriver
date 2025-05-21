@@ -10,12 +10,10 @@
     Fork maintainer: LunarWatcher (https://github.com/LunarWatcher
 """
 
-# Imports #
 import os
 
 from setuptools import setup
 
-# Constants #
 DIRNAME = os.path.dirname(__file__)
 DESCRIPTION = (
     "A Firefox Selenium WebDriver that patches the browser to avoid detection. "
@@ -53,6 +51,8 @@ setup(
         "Programming Language :: Python :: 3.12",
         "License :: OSI Approved :: MIT License",
         "Operating System :: POSIX :: Linux",
+        "Operating System :: MacOS",
+        "Operating System :: Microsoft :: Windows",
     ],
     project_urls={
         "Documentation": "https://github.com/LunarWatcher/undetected_geckodriver#readme",
