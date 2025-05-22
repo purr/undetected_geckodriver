@@ -16,9 +16,8 @@ from setuptools import setup
 
 DIRNAME = os.path.dirname(__file__)
 DESCRIPTION = (
-    "A Firefox Selenium WebDriver that patches the browser to avoid detection. "
-    "Bypasses services such as Cloudflare, Distil Networks, and more. "
-    "Ideal for web scraping, automated testing, and bot development without getting detected."
+    "A Firefox Selenium WebDriver that patches geckodriver to hide certain "
+    "webdriver identifiers"
 )
 LONG_DESC = open(os.path.join(DIRNAME, "README.md")).read()
 
@@ -26,7 +25,7 @@ LONG_DESC = open(os.path.join(DIRNAME, "README.md")).read()
 # Setup #
 setup(
     name="undetected-geckodriver-lw",
-    version="2.1.0",
+    version="2.1.1",
     packages=["undetected_geckodriver"],
     install_requires=["selenium>=4.10.0", "psutil>=5.8.0"],
     include_package_data=True,
