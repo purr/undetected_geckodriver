@@ -149,4 +149,6 @@ class Firefox(RemoteWebDriver, WebDriverMixin):
             full_path: str = os.path.join(self._undetected_path, executable)
             if os.path.exists(full_path):
                 return full_path
+            logger.error("Failed to find FF executable at %s", full_path)
+
         raise FileNotFoundError("Could not find Firefox executable")
