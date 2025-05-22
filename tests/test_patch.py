@@ -17,6 +17,7 @@ class TestPatch(unittest.TestCase):
         driver = undetected_geckodriver.Firefox(
             lookup_path=overridden_path
         )
+        driver.quit()
         dir = driver._get_undetected_firefox_path()
         patched_file = os.path.join(
             dir,

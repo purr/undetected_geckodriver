@@ -9,14 +9,14 @@ PLATFORM_DEPENDENT_PARAMS = {
         "undetected_path": "C:\\Users\\{USER}\\AppData\\Local\\undetected_firefox\\",
         "xul": "xul.dll",
     },
-    "Darwin": {
-        # TODO: Does  this just apply to the FF-installing GH Actions, or does
-        # the system install actually use Firefox.app for its binary
-        "firefox_execs": ["firefox"],
-        "firefox_paths": ["/Applications/Firefox.app/Contents/MacOS"],
-        "undetected_path": "/Users/{USER}/Library/Caches/undetected_firefox/",
-        "xul": "XUL",
-    },
+    # "Darwin": {
+        # # TODO: Does  this just apply to the FF-installing GH Actions, or does
+        # # the system install actually use Firefox.app for its binary
+        # "firefox_execs": ["firefox"],
+        # "firefox_paths": ["/Applications/Firefox.app/Contents/MacOS"],
+        # "undetected_path": "/Users/{USER}/Library/Caches/undetected_firefox/",
+        # "xul": "XUL",
+    # },
     "Linux": {
         "firefox_execs": ["firefox", "firefox-bin"],
         "firefox_paths": [

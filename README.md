@@ -25,6 +25,12 @@ cd undetected_geckodriver
 pip install .
 ```
 
+## Supported operating systems
+
+Only Windows and Linux are supported. macOS is not supported at this time, due to Crapple being crap to work with, it refusing all attempts to debug via Actions, and the only remaining option being to buy hardware for nearly or over 2000 EUR for enough access to debug a relatively basic file-related issue that still requires more hands-on access. 
+
+Pull requests making it work are welcome, and the only way it will be supported.
+
 ## Usage
 
 Since Undetected GeckoDriver acts as an interface for Selenium, you can use it the same way you would use Selenium.
