@@ -7,10 +7,8 @@ import logging
 import psutil
 from selenium.webdriver.common.driver_finder import DriverFinder
 from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.remote_connection import FirefoxRemoteConnection
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.webdriver import WebDriver
-from selenium.webdriver.remote.webdriver import WebDriver as RemoteWebDriver
 
 from .constants import TO_REPLACE_STRING
 from .mixins import WebDriverMixin
@@ -22,7 +20,7 @@ from .utils import (
 
 logger = logging.getLogger(__name__)
 
-class Firefox(RemoteWebDriver, WebDriverMixin):
+class Firefox(WebDriver, WebDriverMixin):
     """
     A custom Firefox WebDriver that attempts to avoid detection by web services.
     """
@@ -49,31 +47,12 @@ class Firefox(RemoteWebDriver, WebDriverMixin):
         self.options.binary_location = self._find_platform_dependent_executable()
         self.keep_alive: bool = keep_alive
 
-        self._initialize_service()
+        super().__init__(self.options, self.service, self.keep_alive)
 
     def _setup_firefox_environment(self):
         """Set up the undetected Firefox environment."""
         self._create_undetected_firefox_directory()
         self._patch_libxul_file()
-
-    def _initialize_service(self):
-        """Initialize the Firefox service and remote connection."""
-        finder = DriverFinder(self.service, self.options)
-        self.service.path = finder.get_driver_path()
-        self.service.start()
-
-        executor = FirefoxRemoteConnection(
-            remote_server_addr=self.service.service_url,
-            keep_alive=self.keep_alive,
-            ignore_proxy=self.options._ignore_local_proxy,
-        )
-        try:
-            super().__init__(command_executor=executor, options=self.options)
-        except Exception:
-            self.quit()
-            raise
-
-        self._is_remote = False
 
     def _get_firefox_installation_path(self) -> str:
         """
