@@ -15,7 +15,13 @@ class WebDriverMixin:
         return iter(self.webdriver)
 
     def __len__(self):
-        return len(self.webdriver)
+        # WebDriver objects don't have __len__, so just return 1 (truthy)
+        # This avoids a TypeError when the object is used in a boolean context
+        return 1
+
+    def __bool__(self):
+        # Always return True for boolean checks
+        return True
 
     def __type__(self):
         return type(self.webdriver)

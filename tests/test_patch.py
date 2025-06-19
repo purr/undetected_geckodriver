@@ -21,8 +21,8 @@ class TestPatch(unittest.TestCase):
         This will fail on unsupported operating systems, or operating systems
         where the patch just generally fails for whatever reason.
         """
-        dir = self.driver._get_undetected_firefox_path()
-        patched_file = os.path.join(dir, self.driver._platform_dependent_params["xul"])
+        dir = self.driver._get_undetected_geckodriver_path()
+        patched_file = os.path.join(dir, self.driver.platform_config.xul)
 
         with open(patched_file, "rb") as file:
             libxul_data = file.read()

@@ -14,6 +14,11 @@ Fork maintainer: LunarWatcher (https://github.com/LunarWatcher
 import importlib.metadata
 
 from .driver import Firefox  # noqa
+from .errors import (
+    FirefoxCopyException,
+    FirefoxNotFoundException,
+    FirefoxPatchException,
+)
 
 # Constants #
 try:
@@ -22,4 +27,9 @@ except Exception:
     __version__ = "<unknown; not installed via pip>"
 
 
-__all__ = ["Firefox"]
+__all__ = [
+    "Firefox",
+    "FirefoxNotFoundException",
+    "FirefoxCopyException",
+    "FirefoxPatchException",
+]
