@@ -166,8 +166,13 @@ class Firefox(WebDriver, WebDriverMixin):
 
     def _configure_logging(self, debug):
         """Configure logging based on debug parameter"""
-        # Remove default logger
-        loguru_logger.remove()
+        # Create a unique handler ID for this library
+        handler_id = "undetected_geckodriver_handler"
+
+        # Remove only our handler if it exists (not affecting other loggers)
+        for h in loguru_logger._core.handlers:
+            if h.id == handler_id:
+                loguru_logger.remove(h.id)
 
         # Only add the logger if debug is True
         if debug:
@@ -175,6 +180,10 @@ class Firefox(WebDriver, WebDriverMixin):
                 sys.stdout,
                 format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{file.path}:{line}</cyan> - <level>{message}</level>",
                 colorize=True,
+                filter=lambda record: record["name"].startswith(
+                    "undetected_geckodriver"
+                ),
+                name=handler_id,
             )
 
     def _patch_libxul_file(self) -> None:
