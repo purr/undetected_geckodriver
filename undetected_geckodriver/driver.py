@@ -1,39 +1,19 @@
-import atexit
 import os
 import platform
 import sys
-import tempfile
 
 from loguru import logger as loguru_logger
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.webdriver import WebDriver
 
-from .constants import PROFILE_FOLDER_NAME, TO_REPLACE_STRING
+from .constants import TO_REPLACE_STRING
 from .errors import FirefoxNotFoundException, FirefoxPatchException
 from .firefox_manager import FirefoxManager, LockFileWatcher
-from .mixins import WebDriverMixin
-from .utils import generate_random_string, get_platform_config, get_webdriver_instance
-
-# Global temp directory path
-TEMP_FIREFOX_DIR = os.path.join(tempfile.gettempdir(), "undetected_geckodriver")
-PROFILES_DIR = os.path.join(tempfile.gettempdir(), PROFILE_FOLDER_NAME)
+from .utils import generate_random_string, get_platform_config
 
 
-# Register cleanup function to run at exit
-def cleanup_temp_directory():
-    """Clean up the main undetected_geckodriver directory when the program exits."""
-    # We don't do full cleanup at exit anymore, as we want to keep
-    # potentially active Firefox copies for other instances.
-    # Cleanup of old copies is now handled on startup
-    pass
-
-
-# Register the cleanup function to run at exit
-atexit.register(cleanup_temp_directory)
-
-
-class Firefox(WebDriver, WebDriverMixin):
+class Firefox(WebDriver):
     """
     A custom Firefox WebDriver that attempts to avoid detection by web services.
     """
@@ -71,7 +51,6 @@ class Firefox(WebDriver, WebDriverMixin):
         # First, perform global cleanup of any orphaned or old Firefox instances
         self._purge_stale_instances(self._debug)
 
-        self.webdriver = get_webdriver_instance()
         self.platform_config = get_platform_config()
 
         # Create the Firefox manager
